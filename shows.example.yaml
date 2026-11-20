@@ -1,0 +1,44 @@
+# Example show list. Copy this to shows.local.yaml and put your real shows in it.
+# shows.local.yaml is ignored by git, so your feed URLs stay private.
+# Treat feed URLs like passwords: some have a private key built in.
+
+# How clean episodes reach your phone (deliver.py):
+#   home   Syncthing syncs episodes/clean to the phone; the line checks it arrived
+#   cloud  a private feed (not built in this project yet)
+#   both   home and cloud
+#   off    don't check delivery (the default if this line is missing)
+delivery: home
+
+# Closing duties (cleanup.py). Deleting can't be undone: run "python cleanup.py" first,
+# which only lists what it would delete. These are the defaults if the section is missing.
+cleanup:
+  keep_clean: 3       # newest clean episodes per show (Syncthing removes older ones from the phone)
+  clean_min_days: 7   # never delete a clean episode made less than this many days ago
+  raw_days: 7         # delete an original this many days after the phone got its clean version
+  text_days: 30       # delete transcripts and cut lists this many days after publish (once finished)
+  test_days: 7        # delete files in episodes/test older than this
+
+# Defaults: used for every show unless the show sets its own. Leave this whole
+# section out and the line uses enabled: true, keep: 1.
+defaults:
+  enabled: true      # true = on the line, false = paused (nothing new is downloaded)
+  keep: 1            # how many of the newest episodes to have processed (1 to 10)
+
+shows:
+  # The smallest show entry: just a name and a feed. Everything else uses the defaults.
+  - name: Example Show
+    feed: https://feeds.example.com/example-show/podcast.rss
+
+  # A show using every option.
+  - name: Another Example Show
+    feed: https://feeds.example.com/another-example/podcast.rss
+    enabled: false   # paused. Episodes already downloaded still finish the line.
+    keep: 2          # the newest 2 episodes, not just the newest 1
+    skip_titles:     # pass over episodes whose title contains any of these
+      - Bonus Crossover
+      - Live Q&A
+
+# Notes for the Spotter don't go in this file. Each show can have its own notes in
+# show-notes/<show-folder>.md, where the folder name is the show's name in lowercase
+# with dashes: "Another Example Show" -> show-notes/another-example-show.md.
+# A show with no notes file is spotted with the general rules in spotter-rules.md.

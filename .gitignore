@@ -1,0 +1,48 @@
+# --- Audio: never leaves this computer ---
+*.mp3
+*.m4a
+*.m4b
+*.mp4
+*.aac
+*.wav
+*.flac
+*.ogg
+*.oga
+*.opus
+*.wma
+*.aif
+*.aiff
+*.webm
+*.weba
+*.mka
+*.mp2
+*.amr
+
+# Half-finished downloads
+*.part
+
+# All downloaded, transcribed and cut episodes
+episodes/
+
+# --- Private settings: feed URLs and keys ---
+*local*
+*secret*
+.env
+.env.*
+# Any copy of the show list (shows.yaml, shows-backup.yml...), except the example
+shows*.yaml
+shows*.yml
+!shows.example.yaml
+
+# Logs can contain error messages, and error messages can contain links
+*.log
+logs/
+
+# Downloaded AI models (several GB)
+models/
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.pyc

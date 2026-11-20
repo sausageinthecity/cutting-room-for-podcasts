@@ -1,0 +1,30 @@
+# edit-settings.yaml: house style for the Edit (Module 3).
+# Change a number here and the next edit uses it. No code changes needed.
+
+# Which Spotter marks actually get cut. Everything else stays in the
+# episode and gets logged. When in doubt, leave it in.
+cut_confidence: [high]
+
+# Crossfade at each seam, in seconds. The show just before the cut fades
+# into the show just after it, so the join sounds like a quick dip, not a
+# splice. Only show audio is in the fade, never the ad.
+# Speech usually sounds natural between 0.1 and 0.3.
+crossfade: 0.25
+
+# Cut a little wider than the ad on each side, in seconds, so a stray
+# syllable of the ad can't sneak through (Whisper's word times can be off by
+# a few hundredths). This never reaches into a show word: if the nearest
+# show word is closer than this, the cut stops halfway to it.
+padding: 0.15
+
+# Back-to-back cuts closer than this many seconds get joined into one cut,
+# but only if nobody says a word in between. That handles the short wordless
+# blips between ads (a sting or a pause), so no lone scrap of break is left.
+merge_gap: 5.0
+
+# Output. Matches the originals (MP3, 128 kbps, stereo, 44.1 kHz).
+# "match" means: copy whatever the original has.
+format: mp3
+bitrate: match       # or a number like 128k
+sample_rate: match
+channels: match
